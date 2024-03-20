@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
+import { v4 as uuidv4 } from 'uuid';
+// import React from 'react';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Manager = () => {
     const ref = useRef()
+    const passwordRef = useRef()
     const [form, setform] = useState({site:"",username:"", password:""})
     const [passwordArray, setpasswordArray] = useState([])
+    
+
+
   
     useEffect(() => {
         let passwords = localStorage.getItem("passwords")
@@ -17,29 +26,104 @@ const Manager = () => {
 
 
    const showPassword = () =>{
-     alert("show the password");
+    passwordRef.current.type = "text"
+    //  alert("show the password");
      if(ref.current.src.includes("icons/eye-crossed.png")){
          ref.current.src = "icons/visibility.png"
+         passwordRef.current.type = "password"
      }
      else{
         ref.current.src = "icons/eye-crossed.png"
+        passwordRef.current.type = "text"
      }
    }
 
    const savePassword = () =>{
-    setpasswordArray([...passwordArray, form])
-    localStorage.setItem("passwords", JSON.stringify([...passwordArray, form]))
+    setpasswordArray([...passwordArray, {...form, id:uuidv4()}])
+    localStorage.setItem("passwords", JSON.stringify([...passwordArray, {...form, id:uuidv4()}]))
     console.log(passwordArray)
+    setform({site:"",username:"", password:""})
     
+   }
+
+   const deletePassword = (id) =>{
+    console.log("delete password")
+    let c = confirm(
+        toast.warn('🦄 Wow so easy!', {
+            position: "top-center",
+            autoClose: 100000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+            });
+     
+
+    )
+    if(c){
+
+        setpasswordArray(passwordArray.filter(item=>item.id!==id))
+        localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item=>item.id!==id)))
+
+        
+    }
+
+    
+
+
+   }
+
+   const editPassword = (id) =>{
+    setform(passwordArray.filter(item=> item.id===id)[0])
+    setpasswordArray(passwordArray.filter(item=>item.id!==id))
    }
 
    const handleForm = (e) =>{
       setform({...form, [e.target.name]: e.target.value})
+      
+   }
+
+   const copyText = (text) =>{
+    toast.success('🔑 Copied Text to clipboard', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        // transition: Bounce,
+        });
+    navigator.clipboard.writeText(text);
    }
 
 
 
   return (
+
+     <>
+    <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+// transition="Bounce"
+/>
+ {/* Same as */}
+ <ToastContainer />
+
+
+
     <div>
       <div className="relative h-full w-full bg-slate-50">
         <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
@@ -74,7 +158,7 @@ const Manager = () => {
           <div className="relative">
           <input  onChange={handleForm}
             className="rounded-full border border-yellow-400 p-24 py-1"
-            type="text"
+            type="password" ref={passwordRef}
             name="password"
             id="" placeholder="Enter Password" value={form.password}
  
@@ -91,7 +175,7 @@ const Manager = () => {
           trigger="hover"
           style={{color:"white"}}
         ></lord-icon>
-         Add Password</button>
+         Save Password</button>
       </div>
 
       <div className="passwords mycontainer">
@@ -103,7 +187,7 @@ const Manager = () => {
         {passwordArray.length === 0 && <div>No passwords to show</div> }
 
          {passwordArray.length !=0 &&<table className="w-full text-sm text-left rtl:text-right text-white dark:text-gray-400 rounded-xl overflow-hidden">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-slate-950 dark:text-yellow-300">
+        <thead className="text-xs text-gray-50 uppercase bg-gray-50 dark:bg-slate-950 dark:text-yellow-300">
             <tr>
                 <th scope="col" className="px-6 py-3">
                     SITE
@@ -114,20 +198,27 @@ const Manager = () => {
                 <th scope="col" className="px-6 py-3">
                     PASSWORD
                 </th>
+                <th scope="col" className="px-6 py-3">
+                    ACTION
+                </th>
             
             </tr>
         </thead>
         <tbody>
             {passwordArray.map((item, index)=>{
-         return <tr key={index} className="bg-white border-b dark:bg-slate-600 dark:border-gray-700">
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                   <a href={item.site} target="_blank">{item.site}</a> 
+         return <tr key={index} className="bg-white border-b dark:bg-slate-600 dark:border-gray-700 ">
+                <th scope="row" className=" flex px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white gap-6">
+               <a href={item.site} target="_blank">{item.site}</a>  <img className="w-5 cursor-pointer  hover:invert" src="icons/paste.png" alt="copy" value="text"  onClick={(e)=>{copyText(item.site)}} />
                 </th>
                 <td className="px-6 py-4">
-                   {item.username}
+                 <span className="flex gap-4"> {item.username}  <img className="w-5 cursor-pointer  hover:invert" src="icons/paste.png" alt="copy" onClick={(e)=>{copyText(item.username)}} /> </span>
                 </td>
-                <td className="px-6 py-4">
-                    {item.password}
+                <td className="px-6 py-4 ">
+                <span className="flex gap-4">     {item.password}<img className="w-5 cursor-pointer  hover:invert" src="icons/paste.png" alt="copy"  onClick={(e)=>{copyText(item.password)}}/>  </span>
+                </td>   
+                <td className=" flex gap-3 w-12 justify-end   m-6">
+                  <span className="cursor-pointer  hover:invert"><img src="icons/note1.png" alt="edit" onClick={(e)=>{editPassword(item.id)}}/></span>
+                  <span className="cursor-pointer invert hover:invert-0 "><img src="icons/bin.png" alt="edit" onClick={(e)=>{deletePassword(item.id)}}/></span>
                 </td>   
             </tr>
           })}
@@ -139,6 +230,8 @@ const Manager = () => {
       </div>
 
     </div>
+
+    </>
   );
 };
 
