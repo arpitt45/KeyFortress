@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { v4 as uuidv4 } from 'uuid';
 // import React from 'react';
 
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Manager = () => {
@@ -39,35 +39,66 @@ const Manager = () => {
    }
 
    const savePassword = () =>{
-    setpasswordArray([...passwordArray, {...form, id:uuidv4()}])
-    localStorage.setItem("passwords", JSON.stringify([...passwordArray, {...form, id:uuidv4()}]))
-    console.log(passwordArray)
-    setform({site:"",username:"", password:""})
+    if(!form.site || !form.username || !form.password){
+
+      toast.error(' 🥺 Fields cannot be empty!', {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        // transition: Bounce,
+        });
+
+
+    }
+    else{
+
+      setpasswordArray([...passwordArray, {...form, id:uuidv4()}])
+      localStorage.setItem("passwords", JSON.stringify([...passwordArray, {...form, id:uuidv4()}]))
+      console.log(passwordArray)
+      setform({site:"",username:"", password:""})
+        
+      toast.success('🤓 Password saved!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        // transition: Bounce,
+        });
+    }
+
+
+
     
    }
 
    const deletePassword = (id) =>{
     console.log("delete password")
-    let c = confirm(
-        toast.warn('🦄 Wow so easy!', {
-            position: "top-center",
-            autoClose: 100000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-            });
-     
-
-    )
+    let c = confirm("Are you sure?")
     if(c){
 
         setpasswordArray(passwordArray.filter(item=>item.id!==id))
         localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item=>item.id!==id)))
-
+        
+        toast.success('👀 Password Deleted!', {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          // transition: Bounce,
+          });
         
     }
 
@@ -87,7 +118,7 @@ const Manager = () => {
    }
 
    const copyText = (text) =>{
-    toast.success('🔑 Copied Text to clipboard', {
+    toast.success('🙌 Copied Text to clipboard', {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -95,7 +126,7 @@ const Manager = () => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: "colored",
         // transition: Bounce,
         });
     navigator.clipboard.writeText(text);
@@ -106,21 +137,7 @@ const Manager = () => {
   return (
 
      <>
-    <ToastContainer
-position="top-right"
-autoClose={2000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-// transition="Bounce"
-/>
- {/* Same as */}
- <ToastContainer />
+   
 
 
 
