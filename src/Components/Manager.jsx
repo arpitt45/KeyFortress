@@ -199,11 +199,11 @@ const Manager = () => {
         
        
 
-<div className="relative overflow-x-auto container px-460 py-20 md:py-6 mx-auto -m-20 mr-40 ">
+<div className=" overflow-x-auto w-full container px-460 py-20 md:py-6 mx-auto -m-20 md:mr-40  ">
         <h2 className="font-bold md:text-2xl py-3 gap-4">Your Passwords</h2>
         {passwordArray.length === 0 && <div>No passwords to show</div> }
 
-         {passwordArray.length !=0 &&<table className="w-full text-sm text-left rtl:text-right text-white dark:text-gray-400 md:rounded-xl overflow-hidden">
+         {passwordArray.length !=0 &&<table className="w-full text-sm text-left rtl:text-right text-white dark:text-gray-400 md:rounded-xl overflow-hidden ">
         <thead className="text-xs text-gray-50 uppercase bg-gray-50 dark:bg-slate-950 dark:text-yellow-300">
             <tr>
                 <th scope="col" className="px-6 py-3 ">
@@ -223,9 +223,9 @@ const Manager = () => {
         </thead>
         <tbody>
             {passwordArray.map((item, index)=>{
-         return <tr key={index} className="bg-white border-b dark:bg-slate-600 dark:border-gray-700 ">
-                <th scope="row" className=" flex px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white gap-6">
-               <a href={item.site} target="_blank">{item.site}</a>  <img className="w-5 cursor-pointer  hover:invert" src="icons/paste.png" alt="copy" value="text"  onClick={(e)=>{copyText(item.site)}} />
+         return <tr key={index} className="bg-white border-b dark:bg-slate-600 dark:border-white ">
+                <th scope="row" className=" flex px-1 md:px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white gap-5">
+               <a href={item.site} target="_blank">{item.site}</a>  <img className="w-5 cursor-pointer  hover:invert" src="icons/paste.png" alt="copy" value="text"  onClick={(e)=>{copyText(item.site)}} /> 
                 </th>
                 <td className="px-6 py-4">
                  <span className="flex gap-4"> {item.username}  <img className="w-5 cursor-pointer  hover:invert" src="icons/paste.png" alt="copy" onClick={(e)=>{copyText(item.username)}} /> </span>
