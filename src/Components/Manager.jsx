@@ -144,31 +144,31 @@ const Manager = () => {
     <div>
       <div className="relative h-full w-full bg-slate-50">
         <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
-        <div className="mycontainer bg-slate-50">
-          <h1 className="text-4xl font-bold text-center">
+        <div className="md:mycontainer bg-slate-50 py-14 ">
+          <h1 className="text-4xl font-bold text-center  ">
             <span className="text-yellow-400">&lt;</span>
-            Key<span className="text-yellow-400">Fortress/ &gt;</span>
+            Key<span className="text-yellow-400 ">Fortress/ &gt;</span>
           </h1>
           <p className="text-slate-950 text-lg text-center">
             Your own Password Manager
           </p>
         </div>
       </div>
-      <div className=" mycontainer w-1/2 -mt-4 flex flex-col p-4 text-black gap-6 items-center">
+      <div className="  md:mycontainer md:w-1/2  mt-13   md:-mt-14 flex flex-col  text-black gap-6 items-center">
 
         <input onChange={handleForm}
-          className="rounded-full border border-yellow-400  p-80 py-1" name="site"
-          type="text" placeholder="Enter website URL"
+          className="rounded-full border border-yellow-400  p-14 md:px-80 px-20 py-1 " name="site"
+          type="text" placeholder="Enter your website URL"
            value={form.site}
         />
 
-        <div className="flex w-full justify-between gap-6">
+        <div className="flex-col md:flex-row flex md:w-100 justify-between gap-6 ">
 
           <input onChange={handleForm}
-            className="rounded-full border border-yellow-400 p-24 py-1"
+            className="rounded-full border border-yellow-400 p-24   py-1 "
             type="text"
             name="username"
-            id="" placeholder="Enter Username"
+            id="" placeholder="  Enter your Username"
               value={form.username}
           />
 
@@ -177,7 +177,7 @@ const Manager = () => {
             className="rounded-full border border-yellow-400 p-24 py-1"
             type="password" ref={passwordRef}
             name="password"
-            id="" placeholder="Enter Password" value={form.password}
+            id="" placeholder="  Enter your Password" value={form.password}
  
           />
           <span className="absolute right-1 top-0 " onClick={showPassword}>
@@ -186,7 +186,7 @@ const Manager = () => {
           </div>
 
         </div>
-        <button onClick={savePassword} className="flex justify-center items-center bg-yellow-400 hover:bg-yellow-200 rounded-full px-4 py-2 w-fit gap-2 border-2 border-slate-500 font-semibold">
+        <button onClick={savePassword} className="flex justify-center items-center bg-yellow-400 hover:bg-yellow-200 rounded-full px-4 md:py-2 py-1 w-fit gap-2 border-2 border-slate-500 font-semibold">
         <lord-icon
           src="https://cdn.lordicon.com/jgnvfzqg.json"
           trigger="hover"
@@ -195,18 +195,18 @@ const Manager = () => {
          Save Password</button>
       </div>
 
-      <div className="passwords mycontainer">
+      <div className="passwords md:mycontainer">
         
        
 
-<div className="relative overflow-x-auto container px-460 py-16 mx-auto -m-20 mr-40">
-        <h2 className="font-bold text-2xl py-3 gap-4">Your Passwords</h2>
+<div className="relative overflow-x-auto container px-460 py-20 md:py-6 mx-auto -m-20 mr-40 ">
+        <h2 className="font-bold md:text-2xl py-3 gap-4">Your Passwords</h2>
         {passwordArray.length === 0 && <div>No passwords to show</div> }
 
-         {passwordArray.length !=0 &&<table className="w-full text-sm text-left rtl:text-right text-white dark:text-gray-400 rounded-xl overflow-hidden">
+         {passwordArray.length !=0 &&<table className="w-full text-sm text-left rtl:text-right text-white dark:text-gray-400 md:rounded-xl overflow-hidden">
         <thead className="text-xs text-gray-50 uppercase bg-gray-50 dark:bg-slate-950 dark:text-yellow-300">
             <tr>
-                <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3 ">
                     SITE
                 </th>
                 <th scope="col" className="px-6 py-3">
