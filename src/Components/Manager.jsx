@@ -169,7 +169,7 @@ const Manager = () => {
             className="rounded-full border border-yellow-400 p-24 py-1 md:w-auto w-full"
             type="text"
             name="username"
-            id="" placeholder="         Enter Username"
+            id="" placeholder="         Enter your Username"
               value={form.username}
           />
 
@@ -228,8 +228,8 @@ const Manager = () => {
                 <th scope="row" className=" flex px-1 md:px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white gap-5">
                <a href={item.site} target="_blank">{item.site}</a>  <img className="w-5 cursor-pointer  hover:invert" src="icons/paste.png" alt="copy" value="text"  onClick={(e)=>{copyText(item.site)}} /> 
                 </th>
-                <td className="px-6 py-4">
-                 <span className="flex gap-4"> {item.username}  <img className="w-5 cursor-pointer  hover:invert" src="icons/paste.png" alt="copy" onClick={(e)=>{copyText(item.username)}} /> </span>
+                <td className="px-8 py-4">
+                 <span className="flex gap-4 text-nowrap"> {item.username}  <img className="w-5 cursor-pointer  hover:invert" src="icons/paste.png" alt="copy" onClick={(e)=>{copyText(item.username)}} /> </span>
                 </td>
                 <td className="px-6 py-4 ">
                 <span className="flex gap-4">     {item.password}<img className="w-5 cursor-pointer  hover:invert" src="icons/paste.png" alt="copy"  onClick={(e)=>{copyText(item.password)}}/>  </span>
