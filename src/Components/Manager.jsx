@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { v4 as uuidv4 } from 'uuid';
 // import React from 'react';
+import "../App.css"
 
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -162,19 +163,19 @@ const Manager = () => {
            value={form.site}
         />
 
-        <div className="flex-col md:flex-row flex md:w-100 justify-between gap-6 ">
+        <div className="flex-col md:flex-row flex md:w-100 justify-between gap-6  ">
 
           <input onChange={handleForm}
-            className="rounded-full border border-yellow-400 p-24   py-1 "
+            className="rounded-full border border-yellow-400 p-24 py-1 md:w-auto w-full"
             type="text"
             name="username"
-            id="" placeholder="  Enter your Username"
+            id="" placeholder="         Enter Username"
               value={form.username}
           />
 
           <div className="relative">
           <input  onChange={handleForm}
-            className="rounded-full border border-yellow-400 p-24 py-1"
+            className="rounded-full border border-yellow-400 p-24 py-1 md:w-auto w-full"
             type="password" ref={passwordRef}
             name="password"
             id="" placeholder="  Enter your Password" value={form.password}
@@ -206,7 +207,7 @@ const Manager = () => {
          {passwordArray.length !=0 &&<table className="w-full text-sm text-left rtl:text-right text-white dark:text-gray-400 md:rounded-xl overflow-hidden ">
         <thead className="text-xs text-gray-50 uppercase bg-gray-50 dark:bg-slate-950 dark:text-yellow-300">
             <tr>
-                <th scope="col" className="px-6 py-3 ">
+                <th scope="col" className="px-8 py-3 ">
                     SITE
                 </th>
                 <th scope="col" className="px-6 py-3">
