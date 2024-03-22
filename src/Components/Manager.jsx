@@ -158,7 +158,7 @@ const Manager = () => {
       <div className="  md:mycontainer md:w-1/2  mt-13   md:-mt-14 flex flex-col  text-black gap-6 items-center">
 
         <input onChange={handleForm}
-          className="rounded-full border border-yellow-400  p-14 md:px-80 px-20 py-1 " name="site"
+          className="rounded-full border border-yellow-400  p-14 md:px-80 px-20 py-1 md:w-auto w-full " name="site"
           type="text" placeholder="Enter your website URL"
            value={form.site}
         />
